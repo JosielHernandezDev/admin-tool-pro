@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-body">
+    <h3>{{ title }}</h3>
+    <ng-container *ngIf="doughnutChartData; else elseDonutTemplate">
+        <div style="display: block">
+            <canvas
+              baseChart
+              [data]="doughnutChartData"
+              [labels]="doughnutChartLabels"
+              [colors]="colors"
+              chartType="doughnut"
+            >
+            </canvas>
+          </div>    
+    </ng-container>
+    <ng-template #elseDonutTemplate>
+        <h3>not Display</h3>
+    </ng-template>
+  </div>
+</div>

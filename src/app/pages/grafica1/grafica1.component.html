@@ -1,1 +1,17 @@
-<p>grafica1 works!</p>
+<div class="row">
+  <div class="col-6">
+    <app-donut title="Sales" [dataDonut]="doughnutChartData" [labelsDonut]="doughnutChartLabels"></app-donut>
+  </div>
+  <div class="col-6">
+    <app-donut title="Inventary" [dataDonut]="doughnutChartData" [labelsDonut]="doughnutChartLabels"></app-donut>
+  </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+      <app-donut title="Data by month"  [dataDonut]="doughnutChartData" [labelsDonut]="doughnutChartLabels"></app-donut>
+    </div>
+    <div class="col-6">
+      <app-donut title="Sales 4" [dataDonut]="doughnutChartData" [labelsDonut]="doughnutChartLabels"></app-donut>
+    </div>
+  </div>
