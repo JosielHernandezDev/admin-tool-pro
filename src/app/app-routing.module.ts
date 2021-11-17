@@ -6,7 +6,7 @@ import { AuthRoutingModule } from "./auth/auth.routing";
 import { NotfoundComponent } from "./notfound/notfound.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: "/dasboard", pathMatch: "full" },  
+  { path: '', redirectTo: "/dashboard", pathMatch: "full" },  
   { path: "**", component: NotfoundComponent },
 ];
 
