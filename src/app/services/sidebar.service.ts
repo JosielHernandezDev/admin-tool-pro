@@ -20,11 +20,17 @@ export class SidebarService {
         {
           title: 'Char',
           url: 'grafica1',
-        }
+        },
+        {
+          title: 'Promises',
+          url: 'promise',
+        },
+        {
+          title: 'Rjx',
+          url: 'rjx-page',
+        },
       ],
     },
   ];
   constructor() {}
-
-
 }

@@ -31,7 +31,7 @@
                         </span></a>
                     <ul aria-expanded="false" class="collapse">
                         <li *ngFor="let child of item.childrens">
-                            <a [routerLink]="[child.url]">{{child.title}} </a>
+                            <a [routerLink]="[child.url]" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">{{child.title}} </a>
                         </li>
                     </ul>
                 </li>
