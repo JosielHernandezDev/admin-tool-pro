@@ -16,6 +16,17 @@ export class UserService {
     this.url = `${environment.base_api}/users`;
   }
 
+  public updateProfile(uid:string,body:any){
+
+    const token: string = localStorage.getItem('token') || '';
+
+    return this.client.put(`${this.url}/${uid}`,body,{
+      headers: {
+        'x-token': token,
+      },
+    })
+  }
+
   public registerUser(body: registerUser) {
     return this.client.post(this.url, body).pipe(
       tap((resp: any) => {

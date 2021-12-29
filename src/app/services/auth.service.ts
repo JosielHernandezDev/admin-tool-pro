@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Login } from '../interfaces/auth.interface';
+import { User } from '../models/user.model';
 
 declare const gapi: any;
 
@@ -12,8 +13,10 @@ declare const gapi: any;
   providedIn: 'root',
 })
 export class AuthService {
-  private url!: string;
   public auth2!: any;
+
+  private url!: string;
+  public user!: User;
 
   constructor(
     private client: HttpClient,
@@ -24,6 +27,9 @@ export class AuthService {
     this.googleInit();
   }
 
+  get uidUser(){
+    return this.user.uid ||'';
+  }
   public login(body: Login) {
     return this.client.post(this.url, body).pipe(
       tap((resp: any) => {
@@ -50,10 +56,13 @@ export class AuthService {
         },
       })
       .pipe(
-        tap(
-          (res: any) => res?.token && localStorage.setItem('token', res?.token)
-        ),
-        map((resp: any) => true),
+        map((res: any) => {
+          const { name,email,image,google,role,uid} = res?.user;
+          this.user = new User(name,email,'',image,google,role,uid);
+
+          res?.token && localStorage.setItem('token', res?.token);
+          return true;
+        }),
         catchError((err: any) => of(false))
       );
   }
@@ -68,7 +77,7 @@ export class AuthService {
   }
 
   public googleInit() {
-    return new Promise((resolve:any) => {
+    return new Promise((resolve: any) => {
       gapi.load('auth2', () => {
         // Retrieve the singleton for the GoogleAuth library and set up the client.
         this.auth2 = gapi.auth2.init({
@@ -82,5 +91,17 @@ export class AuthService {
         // this.attachSignin(document.getElementById('my-signin2'));
       });
     });
+  }
+
+  public get getUserImagePath():string{
+    return this.user.imageProfile
+  }
+
+  public getUserProfile():any{
+    return this.user.userProfile;
+  }
+
+  public set setImage(img:any){
+    this.user.setprofileImg=img;
   }
 }

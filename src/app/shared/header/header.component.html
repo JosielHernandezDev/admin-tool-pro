@@ -251,18 +251,23 @@
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"><img src="./assets/images/users/1.jpg" alt="user"
+                        aria-haspopup="true" aria-expanded="false"><img [src]="userimage" loading="lazy" alt="user"
                             class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn fast">
                         <ul class="dropdown-user">
                             <li>
                                 <div class="dw-user-box">
                                     <div class="u-img">
-                                        <img src="./assets/images/users/1.jpg" alt="user" />
+                                        <img [src]="userimage" loading="lazy" alt="user" />
                                     </div>
                                     <div class="u-text">
-                                        <h4>Steave Jobs</h4>
-                                        <p class="text-muted">varun@gmail.com</p>
+                                        <h4>{{userProfile.name}}</h4>
+                                        <p class="text-muted" *ngIf="userProfile">
+                                            {{userProfile.email.toString() | slice:0:25}}
+                                            <ng-container *ngIf="(userProfile.email.length>200)">
+                                                ...
+                                            </ng-container>
+                                        </p>
                                         <a href="pages-profile.html" class="btn btn-rounded btn-danger btn-sm">View
                                             Profile</a>
                                     </div>
@@ -270,7 +275,7 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a href="#"><i class="ti-user"></i> My Profile</a>
+                                <a [routerLink]="['./profile']" routerLinkActive="router-link-active"><i class="ti-user"></i> My Profile</a>
                             </li>
                             <li>
                                 <a href="#"><i class="ti-wallet"></i> My Balance</a>
@@ -280,7 +285,8 @@
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>
-                                <a [routerLink]="['account-settings']" routerLinkActive="router-link-active"><i class="ti-settings"></i> Account Setting</a>
+                                <a [routerLink]="['account-settings']" routerLinkActive="router-link-active"><i
+                                        class="ti-settings"></i> Account Setting</a>
                             </li>
                             <li role="separator" class="divider"></li>
                             <li>

@@ -10,12 +10,17 @@ import { SidebarService } from 'src/app/services/sidebar.service';
 })
 export class SidebarComponent implements OnInit {
 
+  public userimage!:string;
+  public userProfile!:any;
+
   menuItems!:any[];
   constructor(private sidebarService: SidebarService,private authService:AuthService) { 
     this.menuItems = this.sidebarService.menu;
   }
 
   ngOnInit(): void {
+    this.userimage = this.authService.getUserImagePath;
+    this.userProfile = this.authService.getUserProfile();
   }
 
   logout(){
